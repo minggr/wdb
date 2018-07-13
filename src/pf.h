@@ -6,6 +6,7 @@
 typedef int PageNum;
 #define ALL_PAGES -1
 
+#define PF_OK			0
 #define PF_EOF			1	// end of file
 #define PF_PAGEPINNED		2	// page pinned in buffer
 #define PF_PAGENOTINBUF		3	// page to be unpinned is not in buffer
