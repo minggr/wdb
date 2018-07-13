@@ -3,7 +3,21 @@
 
 TEST(TestPF, CreateFile) {
   PF_Manager pf;
-  ASSERT_EQ(PF_OK, pf.CreateFile("hello.txt"));
+  const char *file = "hello.txt";
+
+  ASSERT_EQ(PF_OK, pf.CreateFile(file));
+  ASSERT_EQ(PF_ERROR, pf.CreateFile(file));
+  unlink(file);
+}
+
+TEST(TestPF, DestroyFile) {
+  PF_Manager pf;
+  const char *file = "hello.txt";
+
+  ASSERT_EQ(PF_ERROR, pf.DestroyFile(file));
+  ASSERT_EQ(PF_OK, pf.CreateFile(file));
+  ASSERT_EQ(PF_OK, pf.DestroyFile(file));
+  ASSERT_EQ(PF_ERROR, pf.DestroyFile(file));
 }
 
 int main(int argc, char **argv) {

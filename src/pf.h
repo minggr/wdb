@@ -15,6 +15,7 @@ typedef int PageNum;
 #define PF_INVALIDPAGE		6	// invalid page number
 #define PF_FILEOPEN		7	// file handle already open
 #define PF_CLOSEDFILE		8	// file is closed
+#define PF_ERROR		9	// file already exist
 
 #define PF_NOMEM		-1	// out of memory
 #define PF_NOBUF		-2	// out of buffer space
