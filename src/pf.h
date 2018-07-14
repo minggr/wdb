@@ -1,10 +1,13 @@
 #ifndef WDB_PF_MANAGER_H
 #define WDB_PF_MANAGER_H
 
+#include <list>
 #include "common.h"
 
 typedef int PageNum;
 #define ALL_PAGES -1
+static const int kPoolSize = 1000;
+static const int kBlockSize = 4096;
 
 #define PF_OK			0
 #define PF_EOF			1	// end of file
@@ -59,6 +62,12 @@ class PF_FileHandle {
   RC MarkDirty(PageNum pageNum) const;
   RC UnpinPage(PageNum pageNum) const;
   RC ForcePages(PageNum pageNum = ALL_PAGES) const;
+
+  int GetFd() const;
+  void SetFd(int fd);
+
+ private:
+  int fd;
 };
 
 class PF_Manager {
@@ -72,6 +81,10 @@ class PF_Manager {
   RC CloseFile(PF_FileHandle &fileHandle);
   RC AllocateBlock(char *&buffer);
   RC DisposeBlock(char *buffer);
+
+ private:
+  int pool_size;
+  std::list<char *> pool;
 };
 
 #endif
